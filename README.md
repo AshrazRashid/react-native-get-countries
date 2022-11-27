@@ -11,11 +11,16 @@ npm install react-native-get-countries
 ## Usage
 
 ```js
-import { multiply } from 'react-native-get-countries';
+import getcountries from "react-native-get-countries";
+
 
 // ...
 
-const result = await multiply(3, 7);
+useEffect(() => {
+    getcountries()
+      .then((res) => setCountries(res))
+      .catch((err) => console.log("err", err));
+  }, [countries]);
 ```
 
 ## Contributing
