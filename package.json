@@ -1,7 +1,7 @@
 {
   "name": "react-native-get-countries",
   "version": "0.1.1",
-  "description": "test",
+  "description": "A simple utility to fetch a list of countries via API in React Native applications.",
   "main": "lib/commonjs/index",
   "module": "lib/module/index",
   "types": "lib/typescript/index.d.ts",
