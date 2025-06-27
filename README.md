@@ -1,36 +1,70 @@
+
+
 # react-native-get-countries
 
-get countries from api
+A simple utility to fetch a list of countries via API in React Native applications.
 
-## Installation
+## 📦 Installation
 
 ```sh
 npm install react-native-get-countries
 ```
 
-## Usage
+or with yarn:
 
-```js
-import getcountries from "react-native-get-countries";
-
-
-// ...
-
-useEffect(() => {
-    getcountries()
-      .then((res) => setCountries(res))
-      .catch((err) => console.log("err", err));
-  }, [countries]);
+```sh
+yarn add react-native-get-countries
 ```
 
-## Contributing
+## 🚀 Usage
 
-See the [contributing guide](CONTRIBUTING.md) to learn how to contribute to the repository and the development workflow.
+```js
+import getCountries from "react-native-get-countries";
+import { useEffect, useState } from "react";
+import { View, Text } from "react-native";
 
-## License
+const ExampleComponent = () => {
+  const [countries, setCountries] = useState([]);
 
-MIT
+  useEffect(() => {
+    getCountries()
+      .then((res) => setCountries(res))
+      .catch((err) => console.error("Error fetching countries:", err));
+  }, []);
+
+  return (
+    <View>
+      {countries.map((country, index) => (
+        <Text key={index}>{country.name}</Text>
+      ))}
+    </View>
+  );
+};
+```
+
+## 📘 API
+
+This library fetches a list of countries from an online API and returns it as an array of objects. Each object contains country details like:
+
+```js
+{
+  name: "Canada",
+  code: "CA",
+  // ...other properties depending on API
+}
+```
+
+## 🤝 Contributing
+
+We welcome contributions! Please refer to the [contributing guide](CONTRIBUTING.md) for setup instructions and best practices.
+
+## 📄 License
+
+This project is licensed under the MIT License.
 
 ---
 
-Made with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+> Created with [create-react-native-library](https://github.com/callstack/react-native-builder-bob)
+
+---
+
