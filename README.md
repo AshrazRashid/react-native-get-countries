@@ -1,5 +1,3 @@
-
-
 # react-native-get-countries
 
 A simple utility to fetch a list of countries via API in React Native applications.
@@ -21,7 +19,7 @@ yarn add react-native-get-countries
 ```js
 import getCountries from "react-native-get-countries";
 import { useEffect, useState } from "react";
-import { View, Text } from "react-native";
+import { View, Text, FlatList } from "react-native";
 
 const ExampleComponent = () => {
   const [countries, setCountries] = useState([]);
@@ -34,9 +32,14 @@ const ExampleComponent = () => {
 
   return (
     <View>
-      {countries.map((country, index) => (
-        <Text key={index}>{country.name}</Text>
-      ))}
+      <Text>Countries:</Text>
+      <FlatList
+        data={countries}
+        keyExtractor={(item) => item.iso_code}
+        renderItem={({ item }) => (
+          <Text>{item.name} ({item.iso_code})</Text>
+        )}
+      />
     </View>
   );
 };
@@ -49,8 +52,7 @@ This library fetches a list of countries from an online API and returns it as an
 ```js
 {
   name: "Canada",
-  code: "CA",
-  // ...other properties depending on API
+  iso_code: "CA"
 }
 ```
 

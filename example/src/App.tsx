@@ -1,18 +1,25 @@
 import * as React from 'react';
-
-import { StyleSheet, View, Text } from 'react-native';
-import { multiply } from 'react-native-get-countries';
+import { StyleSheet, View, Text, FlatList } from 'react-native';
+import getCountries from 'react-native-get-countries';
 
 export default function App() {
-  const [result, setResult] = React.useState<number | undefined>();
+  type Country = { iso_code: string; name: string };
+  const [countries, setCountries] = React.useState<Country[]>([]);
 
   React.useEffect(() => {
-    multiply(3, 7).then(setResult);
+    getCountries().then(setCountries);
   }, []);
 
   return (
     <View style={styles.container}>
-      <Text>Result: {result}</Text>
+      <Text style={styles.title}>Countries:</Text>
+      <FlatList
+        data={countries}
+        keyExtractor={(item: Country) => item.iso_code}
+        renderItem={({ item }: { item: Country }) => (
+          <Text>{item.name} ({item.iso_code})</Text>
+        )}
+      />
     </View>
   );
 }
@@ -22,10 +29,11 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'center',
+    padding: 16,
   },
-  box: {
-    width: 60,
-    height: 60,
-    marginVertical: 20,
+  title: {
+    fontSize: 20,
+    fontWeight: 'bold',
+    marginBottom: 16,
   },
 });
